@@ -35,8 +35,7 @@ const AddItem = props => {
           <label for='cover'>Cover link</label>
   	      <input type='text' name='cover' />
         </div>
-          <label><input type="radio" name="radio">Original</label>
-        </div>
+       <label><input type="radio" name="radio" />Original</label>
   	  </form>
   	</div>
   	);
