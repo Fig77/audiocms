@@ -8,6 +8,8 @@ const AudioItem = props => {
 		  <td>{title}</td>
 		  <td>{author}</td>
 		  <td>{narrator}</td>
+		  <td>Edit</td>
+		  <td>Delete</td>
 		</tr>);
 }
 

@@ -22,7 +22,6 @@ const Table = props => {
 		}
 		return tableitems;
 	}
-
 	return(
 	  <table>
 	    <thead>
@@ -30,6 +29,7 @@ const Table = props => {
 	        <th>Title</th>
 	        <th>Author</th>
 	        <th>Narrator</th>
+	        <th><button onClick = {}>ADD</button></th>
 	      </tr>
 	    </thead>
 	    <tbody>
