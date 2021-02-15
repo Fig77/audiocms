@@ -1,6 +1,5 @@
 import React from 'react';
 import AudioItem from '../components/AudioItem';
-import Book from '../components/ItemDetail';
 
 const Table = props => {
 	const data = props.tableData;

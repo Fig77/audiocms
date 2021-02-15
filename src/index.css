@@ -12,8 +12,12 @@ code {
     monospace;
 }
 
+.w-full {
+  width: 100vw;
+}
+
 .flex {
-	display: flex,
+	display: flex;
 }
 
 .flex-col {

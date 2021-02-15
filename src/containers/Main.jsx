@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchField from '../components/SearchField';
 import Table from './Table';
+import ItemDetail from '../components/ItemDetail';
 import request from '../api/audioApi';
 
 
@@ -21,19 +22,22 @@ const Main = () => {
     setData(dat.items);
   }
 
-  async function add(audio_model) {
-    let dat = undefined;
-    dat = await request('POST', audio_model);
+  const close = () => {
+    if (itemDetail) {
+      setItemDetail(false);
+    } else {
+      setItemDetail(true);
+    }
   }
 
 	return(
-	 <div class='relative'>
-     { itemDetail ? <ItemDetail action='NEW' cancel={setItemDetail}/> : null }
+	 <div class='relative w-full flex flex-col justify-center'>
+     { itemDetail ? <ItemDetail action='NEW' cancel={close}/> : '' }
      <div class='flex'>
 	     <SearchField submit={submit}/>
-       <button onClick={setItemDetail(true)}>New Book</button>
+       <button onClick={() => close() }>New Book</button>
      </div>
-	   <Table tableData = {data} newSubmit = {add} />
+	   <Table tableData = {data} />
 	 </div>
 	 );
 }

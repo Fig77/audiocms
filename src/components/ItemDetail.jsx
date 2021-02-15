@@ -1,26 +1,22 @@
 import React, {useState} from 'react';
+import styles from './components_modules/ItemDetail.module.css';
 
-const Book = props => {
+const ItemDetail = props => {
   const action = props.action;
+  const cancel = props.cancel;
   const handleSubmit = props.submit;
   const data = props.data;
   const [disabled, setDisable] = useState(false);
   const [id, setId] = useState(0);
 
-  if(action !== 'NEW') {
-    setDisable(true);
-  } else {
-    setId(props.id);
-  }
-
-  const onCancel = () => {
-    props.cancel(false);
+  const close = () => {
+    console.log('TEST');
+    cancel();
   }
 
   return(
-    <div>
-      <div>
-  	    <form>
+      <div className = {`absolute flex flex-col justify-center items-center ${styles.container}`}>
+  	    <form className={`flex flex-col justify-center items-center ${styles.form}`}>
           <div>
             <label for="title">Title</label>
   	        <input type='text' name='title'  disabled={disabled}/>
@@ -36,12 +32,11 @@ const Book = props => {
          <label><input type="radio" name="radio"  disabled={disabled}/>Original</label>
          <div>
            <button type='submit' disabled={disabled}>Save</button>
-           <button onClick={() => onCancel }>Cancel</button>
          </div>
   	  </form>
+       <button onClick={() => close() }>Cancel</button>
   	</div>
-  </div>
   );
 }
 
-export default Book;
+export default ItemDetail;
