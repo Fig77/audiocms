@@ -1,7 +1,8 @@
 import React from 'react';
 
 const AudioItem = props => {
-	const {title, author, narrator} = props;
+	const {title, author, narrator, editCall, deleteCall} = props;
+	
 
 	return(
 		<tr>

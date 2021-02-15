@@ -36,6 +36,7 @@ const Main = () => {
      <div class='flex'>
 	     <SearchField submit={submit}/>
        <button onClick={() => close() }>New Book</button>
+       <button onClick={() => setData(undefined)}>Clear</button>
      </div>
 	   <Table tableData = {data} />
 	 </div>
