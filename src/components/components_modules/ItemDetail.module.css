@@ -1,0 +1,14 @@
+.container {
+	top: 0;
+	right: 0;
+	width: 100vw;
+	min-height: 100vh;
+	background-color: rgba(0,0,0,.7);
+}
+
+.form {
+	background-color: #fafafa;
+	border: solid 1px #fafafa;
+	border-radius: 1px;
+	width: 90%;
+}

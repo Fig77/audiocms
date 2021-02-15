@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import styles from './components_modules/ItemDetail.module.css';
 
-const AddItem = props => {
+const Item = props => {
   const [title, setTitle] = useState('');
   const [authors, setAuthor] = useState('');
   const [narrators, setNarrators] = useState('');
@@ -21,8 +22,8 @@ const AddItem = props => {
 
   
   return(
-  	<div>
-  	  <form>
+  	<div className = {`absolute flex flex-col justify-center items-center ${styles.container}`}>
+  	  <form className={`flex flex-col justify-center items-center ${styles.form}`}>
         <div>
           <label for="title">Title</label>
   	      <input type='text' name='title' />
@@ -41,4 +42,4 @@ const AddItem = props => {
   	);
 }
 
-export default AddItem;
+export default Item;

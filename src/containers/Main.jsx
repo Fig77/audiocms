@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import SearchField from '../components/SearchField';
 import Table from './Table';
 import request from '../api/audioApi';
-const getAll = "?select=fields,sys.id,sys.version&locale=es-MX";
+
 
 
 const Main = () => {
-
+  const getAll = "?select=fields,sys.id,sys.version&locale=es-MX";
   const [data, setData] = useState(undefined);
+  const [itemDetail, setItemDetail] = useState(false);
 
   async function submit(value = ''){
     let dat = undefined;
@@ -26,10 +27,14 @@ const Main = () => {
   }
 
 	return(
-	 <div>
-	   <SearchField submit={submit}/>
-	   <Table tableData = {data} />
-	 </div> 
+	 <div class='relative'>
+     { itemDetail ? <ItemDetail action='NEW' cancel={setItemDetail}/> : null }
+     <div class='flex'>
+	     <SearchField submit={submit}/>
+       <button onClick={setItemDetail(true)}>New Book</button>
+     </div>
+	   <Table tableData = {data} newSubmit = {add} />
+	 </div>
 	 );
 }
 

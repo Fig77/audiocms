@@ -1,9 +1,10 @@
 import React from 'react';
 import AudioItem from '../components/AudioItem';
-
+import Book from '../components/ItemDetail';
 
 const Table = props => {
 	const data = props.tableData;
+	const newItem = props.newSubmit;
 
 	const tableRow = (i) => {
   		let title= data[i].fields.title === undefined ? 'title not found' : data[i].fields.title['es-MX']
@@ -22,6 +23,11 @@ const Table = props => {
 		}
 		return tableitems;
 	}
+
+	const submission = model => {
+		newItem(model);
+	}
+
 	return(
 	  <table>
 	    <thead>
@@ -29,7 +35,6 @@ const Table = props => {
 	        <th>Title</th>
 	        <th>Author</th>
 	        <th>Narrator</th>
-	        <th><button onClick = {}>ADD</button></th>
 	      </tr>
 	    </thead>
 	    <tbody>
