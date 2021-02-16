@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import styles from './components_modules/ItemDetail.module.css';
 import bookMd from '../api/audiobook_model';
+import request from '../api/audioApi';
 
 const ItemDetail = props => {
   const action = props.action;
   const cancel = props.cancel;
-  const handleSubmit = props.submit;
   const data = props.data;
-  const [disabled, setDisable] = useState(true);
+  const handleSubmit = props.submit;
+  const datePlaceholder = new Date();
+  const [disabled, setDisable] = useState(false);
   const [id, setId] = useState(0);
-  const [formValues, setFormValues] = useState(['','','',0,0,'',false,'2011-05-06']);
+  const [checkbox, toggleCh] = useState(false);
+  const [formValues, setFormValues] = useState(['','','',0,0,'',false, datePlaceholder.toISOString()]);
   const [init, setInit] = useState(false);
+  const [objectId, setObjectid] = useState('');
 
   const setInitial = () => {
     let authors =  data.fields.authors['es-MX'].join(',');
@@ -27,11 +31,9 @@ const ItemDetail = props => {
     setFormValues(auxiliarArray);
   }
 
-
   useEffect(() => {
     if(init === false) {
-      if(action !== "NEW") {
-        setDisable(false);
+      if(action !== "POST") {
         setInitial();
       }
       setInit(true);
@@ -41,14 +43,29 @@ const ItemDetail = props => {
   const editForm = (i, e) => {
     let auxiliarArray = [...formValues];
     auxiliarArray[i] = e.target.value;
+    if(i  === 6) {
+      if(checkbox) {
+        toggleCh(false);
+        auxiliarArray[i] = false;
+      } else {
+        toggleCh(true);
+        auxiliarArray[i] = true;
+      }
+    }
     setFormValues(auxiliarArray);
   }
 
-  const submitForm = (e) => {
+  async function submitForm(e) {
     e.preventDefault();
+    let answer = undefined;
     bookMd.init(formValues);
-    console.log(bookMd.getBody());
-
+    let bodydata = bookMd.getBody();
+    if(action === 'POST') {
+      answer = await request(action,'',{body:JSON.stringify(bodydata)}); 
+    } else if(action === 'PUT'){
+       //
+    }
+    console.log(answer);
   }
 
   const close = () => {

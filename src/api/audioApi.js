@@ -4,7 +4,7 @@ const env = "master";
 const content_type = "audiocontent-v18";
 const url = `https://api.contentful.com/spaces/${space_id}/environments/${env}/entries`;
 
-async function request(method, query='', body={}, heads={'X-Contentful-Content-Type':`${content_type}`}, auth={Authorization: `Bearer ${token}`}) {
+async function request(method, query='', bodyd={}, heads={'X-Contentful-Content-Type':`${content_type}`}, auth={Authorization: `Bearer ${token}`}) {
   const answer = await fetch(url.concat(query), {
   	method: method,
   	mode: 'cors',
@@ -12,7 +12,7 @@ async function request(method, query='', body={}, heads={'X-Contentful-Content-T
   		...heads,
   		...auth
   	},
-  	...body,
+    ...bodyd,
   }).then(resp => resp.json()).then(data => data).catch(err => err.status);
   return answer;
 }

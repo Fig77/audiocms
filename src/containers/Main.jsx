@@ -11,7 +11,7 @@ const Main = () => {
   const [data, setData] = useState(undefined);
   const [itemDetail, setItemDetail] = useState(false);
 
-  async function submit(value = ''){ // Not using useEffect since is not onLoad but after buttonTrig
+  async function submit(value = ''){
     let dat = undefined;
     if(value === '') {
 	    dat = await request('GET',getAll); // Default query if empty return all
@@ -19,7 +19,9 @@ const Main = () => {
 	  	const query = `?query=${value}&select=fields,sys.id&locale=es-MX`;
 	    dat = await request('GET', query);
     }
-    setData(dat.items);
+    if(dat !== undefined){
+      setData(dat.items);
+    }
   }
 
   const close = () => {
@@ -32,7 +34,7 @@ const Main = () => {
 
 	return(
 	 <div class='relative w-full flex flex-col justify-center'>
-     { itemDetail ? <ItemDetail action='NEW' cancel={close}/> : '' }
+     { itemDetail ? <ItemDetail action='POST' cancel={close}/> : '' }
      <div class='flex'>
 	     <SearchField submit={submit}/>
        <button onClick={() => close() }>New Book</button>

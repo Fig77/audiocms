@@ -1,10 +1,9 @@
 const bookModel = (() => {
   let id = 0;
-  let items = {};
   let raw_body = {};
 
   const init = (it) => {
-    items = it;
+    let items = it;
     raw_body = {
       "fields": {
         "title": {
@@ -17,7 +16,7 @@ const bookModel = (() => {
           "es-MX": items[7],
         },
         "cost_per_play": {
-          "es-MX": items[4],
+          "es-MX": parseInt(items[4]),
         },
         "authors": {
           "es-MX": items[1].split(','),
@@ -26,7 +25,7 @@ const bookModel = (() => {
           "es-MX": items[2].split(','),
         },
         "duration": {
-          "es-MX": items[3],
+          "es-MX": parseInt(items[3]),
         },
         "cover": {
           "es-MX": items[5],
@@ -35,21 +34,11 @@ const bookModel = (() => {
     }
   }
 
-  const editValue = (property, value) => {
-    if(raw_body.fields.hasOwnProperty(property)){
-      raw_body.fields[property] = value;
-    }
-  }
-
-  const getId = () => {
-    return id;
-  }
-
   const getBody = () => {
     return raw_body;
   }
 
-  return {init, getId, getBody, editValue}
+  return {init, getBody}
 })();
 
 export default bookModel;
