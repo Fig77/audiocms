@@ -8,28 +8,28 @@ const bookModel = (() => {
     raw_body = {
       "fields": {
         "title": {
-          "es-MX": `${items.title}`
+          "es-MX": items[0]
         },
         "is_original": {
-          "es-MX": `${items.original}`,
+          "es-MX": items[6],
         },
         "street_date": {
-          "es-MX": `${items.street_date}`,
+          "es-MX": items[7],
         },
         "cost_per_play": {
-          "es-MX": `${items.cost_per_play}`,
+          "es-MX": items[4],
         },
         "authors": {
-          "es-MX": `${items.authors}`,
+          "es-MX": items[1].split(','),
         },
         "narrators": {
-          "es-MX": `${items.narrators}`,
+          "es-MX": items[2].split(','),
         },
         "duration": {
-          "es-MX": `${items.duration}`,
+          "es-MX": items[3],
         },
         "cover": {
-          "es-MX": `${items.cover}`,
+          "es-MX": items[5],
         }
       }
     }
