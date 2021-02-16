@@ -11,7 +11,7 @@ const Main = () => {
   const [data, setData] = useState(undefined);
   const [itemDetail, setItemDetail] = useState(false);
 
-  async function submit(value = ''){
+  async function submit(value = ''){ // Not using useEffect since is not onLoad but after buttonTrig
     let dat = undefined;
     if(value === '') {
 	    dat = await request('GET',getAll); // Default query if empty return all

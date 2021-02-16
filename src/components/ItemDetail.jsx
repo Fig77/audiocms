@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import styles from './components_modules/ItemDetail.module.css';
+import bookMd from '../api/audiobook_model';
 
 const ItemDetail = props => {
   const action = props.action;
   const cancel = props.cancel;
   const handleSubmit = props.submit;
   const data = props.data;
-  const [disabled, setDisable] = useState(false);
+  const [disabled, setDisable] = useState("false");
   const [id, setId] = useState(0);
 
   const close = () => {
-    console.log('TEST');
     cancel();
   }
 
@@ -19,7 +19,7 @@ const ItemDetail = props => {
   	    <form className={`flex flex-col justify-center items-center ${styles.form}`}>
           <div>
             <label for="title">Title</label>
-  	        <input type='text' name='title'  disabled={disabled}/>
+  	        <input type='text' name='title'  value = {action === "NEW" ? '' : data.fields.title ['es-MX'] } disabled={disabled}/>
             <label for="authors">Authors</label>
   	        <input type='text' name='authors' placeholder='author1, author2...' disabled={disabled}/>
             <label for="narrators">Narrators</label>

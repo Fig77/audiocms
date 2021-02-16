@@ -4,13 +4,10 @@ import AudioItem from '../components/AudioItem';
 const Table = props => {
 	const data = props.tableData;
 	const newItem = props.newSubmit;
+	const selectRow = props.selectRow;
 
 	const tableRow = (i) => {
-  		let title= data[i].fields.title === undefined ? 'title not found' : data[i].fields.title['es-MX']
-  		let author = data[i].fields.authors === undefined ? 'authors not found' : data[i].fields.authors['es-MX']
-  		let narrators = data[i].fields.narrators === undefined ? 'narrators not found' : data[i].fields.narrators['es-MX'];
-
-		return(<AudioItem title={title} author={author} narrator={narrators}/>)
+	  return(<AudioItem data={data[i]} edit={rowSelect} index={i} />)
 	}
 
 	const drawAll = () => {
@@ -21,6 +18,10 @@ const Table = props => {
 		  i += 1;
 		}
 		return tableitems;
+	}
+
+	const rowSelect = (i) => {
+		selectRow(i)
 	}
 
 	const submission = model => {
@@ -34,6 +35,7 @@ const Table = props => {
 	        <th>Title</th>
 	        <th>Author</th>
 	        <th>Narrator</th>
+	        <th>Version</th>
 	      </tr>
 	    </thead>
 	    <tbody>
