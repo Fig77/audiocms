@@ -63,7 +63,7 @@ const ItemDetail = props => {
     if(action === 'POST') {
       answer = await request(action,'',{body:JSON.stringify(bodydata)}); 
     } else if(action === 'PUT'){
-       //
+      answer = await request(action, `/${data.sys.id}`,{body:JSON.stringify(bodydata)}, {'X-Contentful-Version': `${data.sys.version !== undefined ? data.sys.version : 1}`})
     }
   }
 

@@ -25,12 +25,14 @@ const Main = () => {
     progress: undefined,
   }
 
-  async function submit(action, hostconcat = '',query='', body={}){
+  async function submit(action, hostconcat = '',query='', body={}, head){
     setLoading(true);
     if(action === 'GET') {
-      hostconcat = `?query=${query}&select=fields,sys.id&locale=es-MX`
-      if(query === '') {
-        hostconcat = "?select=fields,sys.id,sys.version&locale=es-MX";
+      if(hostconcat === '') {
+        hostconcat = `?query=${query}&select=fields,sys.version,sys.id&locale=es-MX`
+        if(query === '') {
+          hostconcat = "?select=fields,sys.version,sys.id&locale=es-MX";
+        }
       }
       const answer = await request(action, hostconcat, body);
        if(answer.sys.type !== 'Error') {
@@ -42,6 +44,9 @@ const Main = () => {
       }
       else {
       const answer = await request(action, hostconcat.concat(query), body);
+      if(answer === 'undefined') {
+        toast.success('Success', optionModal());
+      }
     }
     setLoading(false);
   }

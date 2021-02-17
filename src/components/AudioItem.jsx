@@ -35,7 +35,7 @@ const AudioItem = props => {
 		  <td>{duration}</td>
 		  <td><button className={`button button-blue button-sm`}  onClick = { () => close() }>Edit</button></td>
 		  <td><button className={`button button-red`} onClick = {() => deleteItem() } >Delete</button></td>
-		  { detailsOn === true ? <ItemDetail action="EDIT" data={data} cancel={close} /> : '' }
+		  { detailsOn === true ? <ItemDetail action="PUT" data={data} cancel={close} /> : '' }
 		</tr>);
 }
 
