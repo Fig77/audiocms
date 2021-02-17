@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import ItemDetail from './ItemDetail';
-import request from '../api/audioApi';
 
 const AudioItem = props => {
 	const {data, edit, index} = props;
 	const [editBody, setEditBody] = useState({});
 	const [detailsOn, toggleDetails] = useState(false);
 	const editQuery =`/${data.sys.id}`;
+	const handleFunc = props.submit;
+	const selected = props.selectRow;
 	const title= data.fields.title === undefined ? 'title not found' : data.fields.title['es-MX']
     const author = data.fields.authors === undefined ? 'authors not found' : data.fields.authors['es-MX']
     const narrators = data.fields.narrators === undefined ? 'narrators not found' : data.fields.narrators['es-MX'];
@@ -21,8 +22,8 @@ const AudioItem = props => {
     }
 
     async function deleteItem() {
-    	let answer = await request('DELETE',editQuery);
-    	console.log(answer);
+    	let answer = await handleFunc('DELETE','',editQuery);
+    	selected(index, data.sys.id);
     }
 
 	return(

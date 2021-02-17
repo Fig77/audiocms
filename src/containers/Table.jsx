@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import AudioItem from '../components/AudioItem';
 
 const Table = props => {
 	const data = props.tableData;
-	const newItem = props.newSubmit;
-	const selectRow = props.selectRow;
+	const submit = props.submit;
+	const selectRow = props.selectItem;
 
 	const tableRow = (i) => {
-	  return(<AudioItem data={data[i]} edit={rowSelect} index={i} />)
+	  return(<AudioItem data={data[i]} selectRow={selectRow} index={i} submit={submit}/>)
 	}
 
 	const drawAll = () => {
@@ -20,13 +20,9 @@ const Table = props => {
 		return tableitems;
 	}
 
-	const rowSelect = (i) => {
-		selectRow(i)
-	}
+	useEffect(() => {
+	}, [data.length])
 
-	const submission = model => {
-		newItem(model);
-	}
 
 	return(
 	  <table>
@@ -39,7 +35,7 @@ const Table = props => {
 	      </tr>
 	    </thead>
 	    <tbody>
-	      {data === undefined ? <tr><td>No audiobooks to show</td></tr> : drawAll()}
+	      {data.length === 0 ? <tr><td>No audiobooks to show</td></tr> : drawAll()}
 	    </tbody>
 	  </table>
 	);

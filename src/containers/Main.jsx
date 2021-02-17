@@ -7,21 +7,30 @@ import request from '../api/audioApi';
 
 
 const Main = () => {
-  const getAll = "?select=fields,sys.id,sys.version&locale=es-MX";
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState([]);
   const [itemDetail, setItemDetail] = useState(false);
+  const [selectedId, setSelected] = useState(-1);
+  const [selectedIndex, setIndex] = useState(-1);
+  const [loading, setLoading] = useState(false);
 
-  async function submit(value = ''){
-    let dat = undefined;
-    if(value === '') {
-	    dat = await request('GET',getAll); // Default query if empty return all
-	  } else {
-	  	const query = `?query=${value}&select=fields,sys.id&locale=es-MX`;
-	    dat = await request('GET', query);
+  async function submit(action, hostconcat = '',query='', body={}){
+    if(action === 'GET') {
+      hostconcat = `?query=${query}&select=fields,sys.id&locale=es-MX`
+      if(query === '') {
+        hostconcat = "?select=fields,sys.id,sys.version&locale=es-MX";
+      }
+      const answer = await request(action, hostconcat, body);
+      setData(answer.items);
+    } else {
+      hostconcat = action === 'NEW' ? '' : `/${selectedId}`; 
+      const answer = await request(action, hostconcat, body);
+      if(action === 'DELETE') {
+        let auxData = [...data];
+        auxData.splice(selectedIndex,1);
+        setData(auxData);
+      }
     }
-    if(dat !== undefined){
-      setData(dat.items);
-    }
+
   }
 
   const close = () => {
@@ -32,6 +41,11 @@ const Main = () => {
     }
   }
 
+  const selectItem = (index, itemid) => {
+    setSelected(itemid);
+    setIndex(index);
+  }
+
 	return(
 	 <main className='main relative w-full flex flex-col justify-center'>
      { itemDetail ? <ItemDetail action='POST' cancel={close}/> : '' }
@@ -40,9 +54,9 @@ const Main = () => {
      </div>
      <div className='flex items-center'>
       <button className='button button-blue button-md' onClick={() => close() }>New Book</button>
-      <button className='button button-red button-md' onClick={() => setData(undefined)}>Clear</button>
+      <button className='button button-red button-md' onClick={() => setData([])}>Clear</button>
      </div>
-	   <Table tableData = {data} />
+	   <Table tableData = {data} selectItem = {selectItem} submit = {submit}/>
 	 </main>
 	 );
 }
