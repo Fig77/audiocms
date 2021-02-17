@@ -4,6 +4,7 @@ import ItemDetail from './ItemDetail';
 const AudioItem = props => {
 	const {data, edit, index} = props;
 	const [editBody, setEditBody] = useState({});
+	const [qaux, setAux] = useState(false);
 	const [detailsOn, toggleDetails] = useState(false);
 	const editQuery =`/${data.sys.id}`;
 	const handleFunc = props.submit;
@@ -22,12 +23,12 @@ const AudioItem = props => {
     }
 
     async function deleteItem() {
-    	let answer = await handleFunc('DELETE','',editQuery);
-    	selected(index, data.sys.id);
+    	let answer = await handleFunc('DELETE',editQuery);
+    	setAux(true);
     }
 
 	return(
-		<tr className=''>
+		<tr className={qaux ? 'none' : ''} >
 		  <td>{title}</td>
 		  <td>{author}</td>
 		  <td>{narrators}</td>

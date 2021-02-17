@@ -3,6 +3,8 @@ import SearchField from '../components/SearchField';
 import Table from './Table';
 import ItemDetail from '../components/ItemDetail';
 import request from '../api/audioApi';
+import { toast } from 'react-toastify';
+
 
 
 
@@ -13,24 +15,35 @@ const Main = () => {
   const [selectedIndex, setIndex] = useState(-1);
   const [loading, setLoading] = useState(false);
 
+  const optionModal = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+  }
+
   async function submit(action, hostconcat = '',query='', body={}){
+    setLoading(true);
     if(action === 'GET') {
       hostconcat = `?query=${query}&select=fields,sys.id&locale=es-MX`
       if(query === '') {
         hostconcat = "?select=fields,sys.id,sys.version&locale=es-MX";
       }
       const answer = await request(action, hostconcat, body);
-      setData(answer.items);
-    } else {
-      hostconcat = action === 'NEW' ? '' : `/${selectedId}`; 
-      const answer = await request(action, hostconcat, body);
-      if(action === 'DELETE') {
-        let auxData = [...data];
-        auxData.splice(selectedIndex,1);
-        setData(auxData);
+       if(answer.sys.type !== 'Error') {
+          setData(answer.items);
+          toast.success('Success', optionModal);
+        } else {
+          toast.error('There has been an error: '.concat(answer.message), optionModal);
+        }
       }
+      else {
+      const answer = await request(action, hostconcat.concat(query), body);
     }
-
+    setLoading(false);
   }
 
   const close = () => {
