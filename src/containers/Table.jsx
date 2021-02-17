@@ -35,6 +35,7 @@ const Table = props => {
 	        <th>Title</th>
 	        <th>Author</th>
 	        <th>Narrator</th>
+	        <th>Duration</th>
 	      </tr>
 	    </thead>
 	    <tbody>

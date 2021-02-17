@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ItemDetail from './ItemDetail';
+import request from '../api/audioApi';
 
 const AudioItem = props => {
 	const {data, edit, index} = props;
@@ -9,7 +10,7 @@ const AudioItem = props => {
 	const title= data.fields.title === undefined ? 'title not found' : data.fields.title['es-MX']
     const author = data.fields.authors === undefined ? 'authors not found' : data.fields.authors['es-MX']
     const narrators = data.fields.narrators === undefined ? 'narrators not found' : data.fields.narrators['es-MX'];
-
+    const duration = data.fields.duration === undefined ? 'duration not found' : data.fields.duration['es-MX'];
 
     const close = () => {
       if (detailsOn) {
@@ -19,13 +20,19 @@ const AudioItem = props => {
       }
     }
 
+    async function deleteItem() {
+    	let answer = await request('DELETE',editQuery);
+    	console.log(answer);
+    }
+
 	return(
 		<tr className=''>
 		  <td>{title}</td>
 		  <td>{author}</td>
 		  <td>{narrators}</td>
-		  <td><button onClick = { () => close() }>Edit</button></td>
-		  <td>Delete</td>
+		  <td>{duration}</td>
+		  <td><button className={`button button-blue button-sm`}  onClick = { () => close() }>Edit</button></td>
+		  <td><button className={`button button-red`} onClick = {() => deleteItem() } >Delete</button></td>
 		  { detailsOn === true ? <ItemDetail action="EDIT" data={data} cancel={close} /> : '' }
 		</tr>);
 }
