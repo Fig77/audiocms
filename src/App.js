@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Main from './containers/Main';
 import { ToastContainer } from 'react-toastify';

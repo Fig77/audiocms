@@ -1,5 +1,4 @@
 const bookModel = (() => {
-  let id = 0;
   let raw_body = {};
 
   const init = (it) => {

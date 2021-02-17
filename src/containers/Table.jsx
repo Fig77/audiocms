@@ -7,7 +7,7 @@ const Table = props => {
 	const selectRow = props.selectItem;
 
 	const tableRow = (i) => {
-	  return(<AudioItem data={data[i]} selectRow={selectRow} index={i} submit={submit}/>)
+	  return(<AudioItem key={data[i].sys.id} data={data[i]} index={i} submit={submit}/>)
 	}
 
 	const drawAll = () => {
@@ -25,7 +25,7 @@ const Table = props => {
 
 
 	return(
-	  <table>
+	  <table key='uniq-table-12'>
 	    <thead>
 	      <tr>
 	        <th>Title</th>
@@ -35,7 +35,7 @@ const Table = props => {
 	      </tr>
 	    </thead>
 	    <tbody>
-	      {data.length === 0 ? <tr><td>No audiobooks to show</td></tr> : drawAll()}
+	      {data.length === 0 ? <tr><td>No audiobooks to show</td></tr> : drawAll() }
 	    </tbody>
 	  </table>
 	);

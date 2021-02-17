@@ -88,7 +88,7 @@ code {
 }
 
 table{
-  width:100%;
+  max-width: 90%;
   border-collapse: collapse;
   overflow-x: hidden;
   table-layout: fixed;
