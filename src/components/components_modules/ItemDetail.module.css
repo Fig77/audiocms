@@ -1,15 +1,29 @@
 .container {
+	position: fixed;
 	top: 0;
 	right: 0;
 	width: 100vw;
-	min-height: 80vh;
+	min-height: 100vh;
 	background-color: rgba(0,0,0,.7);
-	position: fixed;
+	
 }
 
 .form {
 	background-color: #fafafa;
 	border: solid 1px #fafafa;
-	border-radius: 1px;
-	width: 90%;
+	border-radius: 5px;
+	width: 50%;
+	height: 500px;
+	padding: 20px;
+}
+
+.formInput {
+	min-width: 300px;
+	max-width: 100%;
+	margin-left: 20px;
+	border: 1px solid #e1e1e1;
+	border-radius: 0;
+	height: 38px;
+	padding-left: 5px;
+	margin-top: 4px;
 }

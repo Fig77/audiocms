@@ -65,7 +65,6 @@ const ItemDetail = props => {
     } else if(action === 'PUT'){
        //
     }
-    console.log(answer);
   }
 
   const close = () => {
@@ -73,28 +72,38 @@ const ItemDetail = props => {
   }
 
   return(
-      <div className = {`absolute flex flex-col justify-center items-center ${styles.container}`}>
-  	    <form className={`flex flex-col justify-center items-center ${styles.form}`} onSubmit = { (e) => submitForm(e) }>
-          <div>
-            <label for="title">Title</label>
-  	        <input type='text' onChange={(e) => editForm(0,e) } name='title'  value = {formValues[0]} disabled={disabled}/>
-            <label for="authors">Authors</label>
-  	        <input type='text' onChange={(e) => editForm(1,e)} name='authors' placeholder='author1, author2...' disabled={disabled} value = {formValues[1]} />
-            <label for="narrators">Narrators</label>
-  	        <input type='narrators' onChange={(e) => editForm(2,e)} name='narrators' value={formValues[2]} placeholder='narrator1, narrator2...' disabled={disabled}/>
-            <label for ='duration'>Duration</label>
-  	        <input type='number' onChange={(e) => editForm(3,e)} name='duration' value={formValues[3]}  disabled={disabled}/>
-            <label for='cost_per_play'>Cost per play</label>
-            <input type='number' onChange={(e) => editForm(4,e)} name='cost_per_play' value={formValues[4]} placeholder='0' disabled={disabled}/>
-            <label for='cover'>Cover link</label>
-  	        <input type='text' onChange={(e) => editForm(5,e)} name='cover' value={formValues[5]}  disabled={disabled}/>
-          </div>
-         <label><input type="checkbox" onChange={(e) => editForm(6,e)} name="checkbox" checked={formValues[6]} disabled={disabled}/>Original</label>
-         <div>
-           <button type='submit' disabled={disabled}>Save</button>
-         </div>
+      <div className = {`flex flex-col justify-center items-center ${styles.container}`}>
+  	    <form className={`flex flex-col justify-center  ${styles.form}`} onSubmit = { (e) => submitForm(e) }>
+           <div className='flex justify-around'>
+              <label className='flex items-center' forHTML="title">Title</label> 
+  	          <input className={`${styles.formInput}`}type='text' onChange={(e) => editForm(0,e) } name='title'  value = {formValues[0]} disabled={disabled}/>
+            </div>
+            <div className='flex justify-around'>
+              <label className='flex items-center' for="authors">Authors</label>
+  	          <input className={`${styles.formInput}`} type='text' onChange={(e) => editForm(1,e)} name='authors' placeholder='author1, author2...' disabled={disabled} value = {formValues[1]} />
+            </div>
+            <div className='flex justify-around'>
+              <label className='flex items-center' for="narrators">Narrators</label>
+  	          <input className={`${styles.formInput}`} type='narrators' onChange={(e) => editForm(2,e)} name='narrators' value={formValues[2]} placeholder='narrator1, narrator2...' disabled={disabled}/>
+            </div>
+            <div className='flex justify-around'>
+              <label className='flex items-center' for ='duration'>Duration</label>
+  	          <input className={`${styles.formInput}`} type='number' onChange={(e) => editForm(3,e)} name='duration' value={formValues[3]}  disabled={disabled}/>
+            </div>
+            <div className='flex justify-around'>
+              <label className='flex items-center' for='cost_per_play'>Cost per play</label>
+              <input className={`${styles.formInput}`} type='number' onChange={(e) => editForm(4,e)} name='cost_per_play' value={formValues[4]} placeholder='0' disabled={disabled}/>
+            </div>
+            <div className='flex justify-around'>
+              <label className='flex items-center' for='cover'>Cover link</label>
+  	          <input className={`${styles.formInput}`} type='text' onChange={(e) => editForm(5,e)} name='cover' value={formValues[5]}  disabled={disabled}/>
+            </div>
+         <label className='self-end'><input type="checkbox" onChange={(e) => editForm(6,e)} name="checkbox" checked={formValues[6]} disabled={disabled}/>Original</label>
+           <div className=''>
+             <button className='button button-green' type='submit' disabled={disabled}>Save</button>
+             <button className='button button-red' onClick={() => close() }>Cancel</button>
+           </div>
   	  </form>
-       <button onClick={() => close() }>Cancel</button>
   	</div>
   );
 }
