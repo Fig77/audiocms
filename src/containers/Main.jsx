@@ -33,15 +33,17 @@ const Main = () => {
   }
 
 	return(
-	 <div class='relative w-full flex flex-col justify-center'>
+	 <main className='main relative w-full flex flex-col justify-center'>
      { itemDetail ? <ItemDetail action='POST' cancel={close}/> : '' }
-     <div class='flex'>
+     <div className='flex items-center'>
 	     <SearchField submit={submit}/>
-       <button onClick={() => close() }>New Book</button>
-       <button onClick={() => setData(undefined)}>Clear</button>
+     </div>
+     <div className='flex items-center'>
+      <button className='button button-blue button-md' onClick={() => close() }>New Book</button>
+      <button className='button button-red button-md' onClick={() => setData(undefined)}>Clear</button>
      </div>
 	   <Table tableData = {data} />
-	 </div>
+	 </main>
 	 );
 }
 

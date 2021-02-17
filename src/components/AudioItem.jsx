@@ -20,13 +20,13 @@ const AudioItem = props => {
     }
 
 	return(
-		<tr>
-		  { detailsOn === true ? <ItemDetail action="EDIT" data={data} cancel={close} /> : '' }
+		<tr className=''>
 		  <td>{title}</td>
 		  <td>{author}</td>
 		  <td>{narrators}</td>
 		  <td><button onClick = { () => close() }>Edit</button></td>
 		  <td>Delete</td>
+		  { detailsOn === true ? <ItemDetail action="EDIT" data={data} cancel={close} /> : '' }
 		</tr>);
 }
 
