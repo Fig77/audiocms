@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import AudioItem from '../components/AudioItem';
 
 const Table = props => {
 	const data = props.tableData;
 	const submit = props.submit;
-	const selectRow = props.selectItem;
 
 	const tableRow = (i) => {
 	  return(<AudioItem key={data[i].sys.id} data={data[i]} index={i} submit={submit}/>)

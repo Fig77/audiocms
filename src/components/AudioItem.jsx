@@ -21,7 +21,7 @@ const AudioItem = props => {
     }
 
     async function deleteItem() {
-    	let answer = await handleFunc('DELETE',editQuery);
+    	await handleFunc('DELETE',editQuery);
     	setAux(true);
     }
 

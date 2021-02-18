@@ -9,8 +9,6 @@ import { toast } from 'react-toastify';
 const Main = () => {
   const [data, setData] = useState([]);
   const [itemDetail, setItemDetail] = useState(false);
-  const [selectedId, setSelected] = useState(-1);
-  const [selectedIndex, setIndex] = useState(-1);
   const [loading, setLoading] = useState(false);
 
   const optionModal = {
@@ -41,7 +39,7 @@ const Main = () => {
         }
       }
       else {
-      const answer = await request(action, hostconcat.concat(query), body);
+      await request(action, hostconcat.concat(query), body);
       toast.success('Success', optionModal);
       setData([]);
     }
@@ -56,10 +54,6 @@ const Main = () => {
     }
   }
 
-  const selectItem = (index, itemid) => {
-    setSelected(itemid);
-    setIndex(index);
-  }
 
 	return(
 	 <main className={`main relative w-full flex flex-col justify-center`}>
@@ -72,7 +66,7 @@ const Main = () => {
       <button className='button button-red button-md' onClick={() => setData([])}>Clear</button>
      </div>
      { loading ? <p>Loading ...</p> :
-	     <Table tableData = {data} selectItem = {selectItem} submit = {submit}/>
+	     <Table tableData = {data}  submit = {submit}/>
      }
 	 </main>
 	 );

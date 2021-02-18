@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './components_modules/ItemDetail.module.css';
 import bookMd from '../api/audiobook_model';
-import request from '../api/audioApi';
-import { toast } from 'react-toastify';
 
 const ItemDetail = props => {
   const action = props.action;
@@ -10,12 +8,10 @@ const ItemDetail = props => {
   const data = props.data;
   const handleSubmit = props.submit;
   const datePlaceholder = new Date();
-  const [disabled, setDisable] = useState(false);
-  const [id, setId] = useState(0);
+  const disabled = false;
   const [checkbox, toggleCh] = useState(false);
   const [formValues, setFormValues] = useState(['','','',0,0,'',false, datePlaceholder.toISOString()]);
   const [init, setInit] = useState(false);
-  const [objectId, setObjectid] = useState('');
 
   const setInitial = () => {
     let authors =  data.fields.authors['es-MX'].join(',');
@@ -39,6 +35,7 @@ const ItemDetail = props => {
       }
       setInit(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const editForm = (i, e) => {
@@ -58,7 +55,6 @@ const ItemDetail = props => {
 
   async function submitForm(e) {
     e.preventDefault();
-    let answer = undefined;
     bookMd.init(formValues);
     let bodydata = bookMd.getBody();
     if(action === 'POST') {
