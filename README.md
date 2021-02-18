@@ -16,6 +16,10 @@ Project consist in a small CMS that lets you do full RESTFUL calls to a particul
 * Run `npm start`
 * App will run in your browser, go to localhost*
 
+## Live link
+
+The preview link for current development is https://pensive-wozniak-e1fbdb.netlify.app
+
 ## Once running:
 
 Use the "Search" button to search querys. 
