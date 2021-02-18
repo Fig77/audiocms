@@ -21,7 +21,7 @@ const Main = () => {
     progress: undefined,
   }
 
-  async function submit(action, hostconcat = '',query='', body={}, head){
+  async function submit(action, hostconcat = '',query='', body={}, head=''){
     setLoading(true);
     if(action === 'GET') {
       if(hostconcat === '') {
@@ -30,7 +30,7 @@ const Main = () => {
           hostconcat = "?select=fields,sys.version,sys.id&locale=es-MX";
         }
       }
-      const answer = await request(action, hostconcat, body);
+      const answer = await request(action, hostconcat, body, head);
        if(answer.sys.type !== 'Error') {
           setData(answer.items);
           toast.success('Success', optionModal);
@@ -39,7 +39,7 @@ const Main = () => {
         }
       }
       else {
-      await request(action, hostconcat.concat(query), body);
+      await request(action, hostconcat.concat(query), body, head);
       toast.success('Success', optionModal);
       setData([]);
     }
